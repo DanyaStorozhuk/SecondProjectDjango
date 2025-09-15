@@ -1,0 +1,130 @@
+{% extends 'tasks/base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+.auth-wrapper-777 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 140px);
+  padding: 30px;
+}
+
+.auth-card-777 {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  width: 340px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-title-777 {
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  color: #000000;
+}
+
+.auth-form-777 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.auth-input-777 {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #cbd5e1;
+  outline: none;
+  transition: border 0.2s, box-shadow 0.2s;
+  font-size: 16px;
+}
+
+.auth-input-777:focus {
+  border-color: #000000;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+.auth-btn-777 {
+  background: linear-gradient(135deg, #4f5257, #6c727c);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
+}
+
+.auth-btn-777:hover {
+  transform: scale(1.03);
+  opacity: 0.95;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+  color: #000; 
+}
+
+.error-box-777 {
+  background: #ffe6e6;
+  color: #b91c1c;
+  border: 1px solid #f87171;
+  border-radius: 12px;
+  padding: 10px 15px;
+  font-size: 14px;
+  margin-bottom: 15px;
+  width: 100%; 
+  text-align: left;
+  box-sizing: border-box;
+  max-height: 100px; 
+  overflow-y: auto; 
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+}
+
+.flip-btn-777 {
+  margin-top: 15px;
+  background: none;
+  border: none;
+  color: #414040;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+  text-decoration: none;
+}
+</style>
+
+<div class="auth-wrapper-777">
+  <div class="auth-card-777">
+    <div class="auth-title-777">Sign up</div>
+    <form class="auth-form-777" method="post" action="{% url 'tasks:register' %}">
+      {% csrf_token %}
+
+      {% if form.errors %}
+        <div class="error-box-777">
+          <ul>
+            {% for field, errors in form.errors.items %}
+              {% for error in errors %}
+                <li>{{ error }}</li>
+              {% endfor %}
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+      <input class="auth-input-777" type="text" name="username" placeholder="Name" required>
+      <input class="auth-input-777" type="email" name="email" placeholder="Email" required>
+      <input class="auth-input-777" type="password" name="password1" placeholder="Password" required>
+      <input class="auth-input-777" type="password" name="password2" placeholder="Confirm Password" required>
+
+      <button type="submit" class="auth-btn-777">Confirm!</button>
+    </form>
+
+    <a href="{% url 'tasks:login' %}" class="flip-btn-777">Back to login</a>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'tasks/base.html' %}
+
+{% block content %}
+<style>
+
+.home-wrapper-777 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 140px);
+  padding: 30px;
+}
+
+.home-card-777 {
+  background: #ffffff;
+  padding: 50px;
+  border-radius: 25px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  width: 400px;
+}
+
+.home-title-777 {
+  font-size: 32px;
+  font-weight: 900;
+  color: #1e293b;
+}
+
+.home-btn-777 {
+  display: block;
+  padding: 15px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  background: linear-gradient(135deg, #4f5257, #6c727c);
+  border-radius: 15px;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.home-btn-777:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+  box-shadow: 0 8px 25px rgb(0, 0, 0);
+  color: #000; 
+
+}
+</style>
+
+<div class="home-wrapper-777">
+  <div class="home-card-777">
+    <div class="home-title-777">Ласкаво просимо</div>
+    <a href="{% url 'tasks:login' %}" class="home-btn-777">Увійти</a>
+    <a href="{% url 'tasks:register' %}" class="home-btn-777">Зареєструватися</a>
+  </div>
+</div>
+{% endblock %}

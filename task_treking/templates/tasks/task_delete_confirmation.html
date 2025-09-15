@@ -1,0 +1,62 @@
+{% extends 'tasks/base.html' %}
+
+{% block content %}
+<style>
+.delete-wrapper-777 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 140px);
+  padding: 30px;
+  color: #fff;
+  text-align: center;
+}
+
+.delete-title-777 {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+.delete-text-777 {
+  font-size: 18px;
+  margin-bottom: 30px;
+  color: #ddd;
+}
+
+.delete-btns-777 {
+  display: flex;
+  gap: 15px;
+}
+
+.delete-btns-777 .btn-custom {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
+}
+
+.delete-btns-777 .btn-custom:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+</style>
+
+<div class="delete-wrapper-777">
+  <h2 class="delete-title-777">Видалення завдання</h2>
+  <p class="delete-text-777">Ви впевнені, що хочете видалити завдання "{{ object.title }}"?</p>
+
+  <form method="post" class="delete-btns-777">
+    {% csrf_token %}
+    <button type="submit" class="btn-custom">Так, видалити</button>
+    <a href="{% url 'tasks:task-list' %}" class="btn-custom">Ні, повернутися до списку</a>
+  </form>
+</div>
+{% endblock %}

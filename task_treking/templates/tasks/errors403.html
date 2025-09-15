@@ -1,0 +1,35 @@
+{% extends 'tasks/base.html' %}
+
+{% block content %}
+<style>
+
+.resume-btn-777 {
+  background: linear-gradient(135deg, #4f5257, #6c727c);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 12px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
+}
+
+.resume-btn-777:hover {
+  transform: scale(1.03);
+  opacity: 0.95;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+  color: #000;
+}
+
+</style>
+
+
+
+<div style="display: flex; justify-content: center; align-items: center; height: 80vh; flex-direction: column; text-align: center;">
+    <h1 style="font-size: 72px; color: #b91c1c;">403</h1>
+    <h2 style="font-size: 28px; margin-bottom: 20px;">Доступ заборонено 🚫</h2>
+    <p style="font-size: 18px; color: #555;">У вас немає прав для перегляду цієї сторінки.</p>
+    <a href="{% url 'tasks:task-list' %}" class="resume-btn-777">На головну </a>
+</div>
+{% endblock %}

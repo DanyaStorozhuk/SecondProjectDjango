@@ -1,0 +1,222 @@
+{% extends 'tasks/base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+/* 🔹 Стилі обгортки */
+.auth-wrapper-777 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 140px);
+  padding: 30px;
+}
+
+.auth-card-switch-777 {
+  perspective: 2000px;
+  position: relative;
+}
+
+.auth-toggle-777 {
+  display: none;
+}
+
+.auth-flip-inner-777 {
+  width: 340px;
+  height: 500px;
+  transition: transform 0.9s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.auth-toggle-777:checked ~ .auth-flip-inner-777 {
+  transform: rotateY(180deg);
+}
+
+.auth-flip-front-777,
+.auth-flip-back-777 {
+  backface-visibility: hidden;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Запобігає виходу вмісту за межі */
+}
+
+.auth-flip-back-777 {
+  transform: rotateY(180deg);
+}
+
+.auth-title-777 {
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  color: #000000;
+}
+
+.auth-form-777 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+
+.auth-input-777, .auth-form-777 input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #cbd5e1;
+  outline: none;
+  transition: border 0.2s, box-shadow 0.2s;
+  font-size: 16px;
+}
+
+.auth-input-777:focus, .auth-form-777 input:focus {
+  border-color: #000000;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+
+.auth-form-777 label {
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #374151;
+  font-size: 14px;
+  display: block;
+}
+
+
+.auth-btn-777 {
+  background: linear-gradient(135deg, #4f5257, #6c727c);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
+}
+
+.auth-btn-777:hover {
+  transform: scale(1.03);
+  opacity: 0.95;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+  color: #000; 
+}
+
+.flip-btn-777 {
+  margin-top: 15px;
+  background: none;
+  border: none;
+  color: #414040;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+
+.error-box-777 {
+  background: #ffe6e6;
+  color: #b91c1c;
+  border: 1px solid #f87171;
+  border-radius: 12px;
+  padding: 10px 15px;
+  font-size: 14px;
+  margin-bottom: 15px;
+  width: 100%; 
+  text-align: left;
+  box-sizing: border-box;
+  max-height: 100px; 
+  overflow-y: auto; 
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+}
+.error-box-777 ul {
+  margin: 0;
+  padding-left: 20px;
+}
+.error-box-777 li {
+  margin: 3px 0;
+  word-wrap: break-word; /* Перенос слів для довгих текстів */
+}
+
+
+input.is-invalid {
+  border-color: #f87171;
+  background: #fff5f5;
+}
+
+
+@media (max-width: 400px) {
+  .auth-flip-inner-777 {
+    width: 100%;
+    height: 450px;
+  }
+  .auth-flip-front-777,
+  .auth-flip-back-777 {
+    padding: 20px;
+  }
+}
+</style>
+
+<div class="auth-wrapper-777">
+  <div class="auth-card-switch-777">
+    <input type="checkbox" id="flip-toggle" class="auth-toggle-777">
+    <div class="auth-flip-inner-777">
+      
+      
+      <div class="auth-flip-front-777">
+        <div class="auth-title-777">Log in</div>
+        <form class="auth-form-777" method="post" action="{% url 'tasks:login' %}">
+          {% csrf_token %}
+
+          {% if form.errors %}
+            <div class="error-box-777">
+              <ul>
+                {% for field, errors in form.errors.items %}
+                  {% for error in errors %}
+                    <li>{{ error }}</li>
+                  {% endfor %}
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+
+          {{ form.as_p }}
+          <button type="submit" class="auth-btn-777">Let's go!</button>
+        </form>
+        <button class="flip-btn-777" onclick="flipCard()">Create account</button>
+      </div>
+
+      
+      <div class="auth-flip-back-777">
+        <div class="auth-title-777">Sign up</div>
+        <form class="auth-form-777" method="post" action="{% url 'tasks:register' %}">
+          {% csrf_token %}
+          <input class="auth-input-777" name="username" placeholder="Name" type="text">
+          <input class="auth-input-777" name="email" placeholder="Email" type="email">
+          <input class="auth-input-777" name="password1" placeholder="Password" type="password">
+          <input class="auth-input-777" name="password2" placeholder="Confirm Password" type="password">
+          <button type="submit" class="auth-btn-777">Confirm!</button>
+        </form>
+        <button class="flip-btn-777" onclick="flipCard()">Back to login</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+function flipCard() {
+  const toggle = document.getElementById('flip-toggle');
+  toggle.checked = !toggle.checked;
+}
+</script>
+{% endblock %}

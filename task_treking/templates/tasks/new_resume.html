@@ -1,0 +1,138 @@
+{% extends 'tasks/base.html' %}
+{% block content %}
+<style>
+.resumes-wrapper-777 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+}
+
+.resumes-title-777 {
+  font-size: 28px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.resumes-list-777 {
+  width: 100%;
+  max-width: 700px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 30px 0;
+}
+
+.resume-item-777 {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.resume-item-777 p {
+  margin: 0;
+  font-size: 16px;
+  color: #1f2937;
+}
+
+.resume-item-777 strong {
+  color: #000;
+}
+
+.resume-btns-777 {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.resume-btns-777 .btn-success {
+  background-color: #28a745;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-weight: 600;
+  transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
+}
+
+.resume-btns-777 .btn-danger {
+  background-color: #dc3545;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-weight: 600;
+  transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
+}
+
+.resume-btns-777 .btn-success:hover,
+.resume-btns-777 .btn-danger:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+
+.bottom-btn-wrapper-777 {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.bottom-btn-wrapper-777 .btn-home {
+  background-color: #55575a;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
+}
+
+.bottom-btn-wrapper-777 .btn-home:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+</style>
+
+<div class="resumes-wrapper-777">
+  <h2 class="resumes-title-777">Список резюме</h2>
+
+  <ul class="resumes-list-777">
+    {% for resume in resumes %}
+      <li class="resume-item-777">
+        <a href="{% url 'tasks:task-detail-resume' resume.pk %}">{{ resume.user.username }}</a>
+        <p><strong>Кандидат:</strong> {{ resume.user.username }}</p>
+        <p><strong>Освіта:</strong> {{ resume.education }}</p>
+        <p><strong>Навички:</strong> {{ resume.skils }}</p>
+        <p><strong>Досвід роботи:</strong> {{ resume.experience }}</p>
+        <div class="resume-btns-777">
+          <form action="{% url 'tasks:resume-approve' resume.id %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-success btn-sm">Прийняти</button>
+          </form>
+          
+          <form action="{% url 'tasks:resume-reject' resume.id %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger btn-sm">Відхилити</button>
+          </form>
+        </div>
+      </li>
+    {% empty %}
+      <li class="resumes-title-777">Немає нових резюме</li>
+    {% endfor %}
+  </ul>
+
+
+  <div class="bottom-btn-wrapper-777">
+    <a href="{% url 'tasks:task-list'%}" class="btn-home">Головна сторінка</a>
+  </div>
+</div>
+{% endblock %}

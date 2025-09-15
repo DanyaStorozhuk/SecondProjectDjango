@@ -1,0 +1,155 @@
+{% extends 'tasks/base.html' %}
+
+{% block content %}
+<style>
+.galaxy-container-777 {
+    min-height: calc(100vh - 140px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+}
+
+.supernova-card-888 {
+    background: #ffffff;
+    border-radius: 25px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+    padding: 40px;
+    max-width: 600px;
+    width: 100%;
+    text-align: left;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.supernova-card-888:hover {
+    
+    box-shadow: 0 18px 50px rgba(0,0,0,0.3);
+}
+
+.orbit-title-999 {
+    font-size: 26px;
+    font-weight: 900;
+    color: #1e293b;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.field-wrapper-777 {
+    margin-bottom: 18px;
+}
+
+.field-label-777 {
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 6px;
+    display: block;
+    color: #1e293b;
+}
+
+.supernova-input-777 {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    font-size: 16px;
+    transition: 0.25s;
+}
+
+.supernova-input-777:focus {
+    outline: none;
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79,70,229,0.25);
+}
+
+.meteor-btn-555 {
+    display: inline-block;
+    padding: 14px 24px;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #4f5257, #6c727c);
+    color: #fff !important;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 17px;
+    transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
+    border: none;
+    margin: 8px 5px;
+}
+
+.meteor-btn-555:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    color: #000 !important;
+}
+
+.meteor-btn-555.secondary-555 {
+    background: #e2e8f0;
+    color: #1e293b !important;
+}
+
+.meteor-btn-555.secondary-555:hover {
+    background: #cbd5e1;
+    color: #000 !important;
+}
+</style>
+
+<div class="galaxy-container-777">
+    <div class="supernova-card-888">
+        <h2 class="orbit-title-999">{{ view.title }}</h2>
+        <form method="post">
+            {% csrf_token %}
+            
+            <div class="field-wrapper-777">
+                <label class="field-label-777" for="id_title">Назва завдання</label>
+                <input type="text" name="title" id="id_title" class="supernova-input-777" value="{{ form.title.value|default_if_none:'' }}">
+            </div>
+
+            <div class="field-wrapper-777">
+                <label class="field-label-777" for="id_description">Опис завдання</label>
+                <input name="description" id="id_description" class="supernova-input-777" value="{{ form.description.value|default_if_none:''}}"
+            </div>
+
+            <div class="field-wrapper-777">
+                <label class="field-label-777" for="id_date">Дата</label>
+                <input type="date" name="date" id="id_date" class="supernova-input-777" value="{{ form.date.value|default_if_none:'' }}">
+            </div>
+
+            <div class="field-wrapper-777">
+                <label class="field-label-777" for="{{ form.status.id_for_label }}">Статус</label>
+                {{ form.status }}
+            </div>
+
+            <div class="field-wrapper-777">
+                <label class="field-label-777" for="{{ form.priority.id_for_label }}">Пріоритет</label>
+                {{ form.priority }}
+            </div> 
+
+            
+            <button type="submit" class="meteor-btn-555">Зберегти</button>
+            <a href="{% url 'tasks:task-list' %}" class="meteor-btn-555 secondary-555">Повернутися до списка</a>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+<!--<div class="field-wrapper-777">
+<!--    <label class="field-label-777" for="id_status">Статус</label>
+<!--    <select name="status" id="id_status" class="supernova-input-777">
+<!--        {% for value, label in form.fields.status.choices %}
+<!--            <option value="{{ value }}" {% if form.status.value == value %}selected{% endif %}>{{ label }}</option>
+<!--        {% endfor %}
+<!--    </select>
+<!--</div>
+<!--
+<!--<!-- Пріоритет -->
+<!--<div class="field-wrapper-777">
+<!--    <label class="field-label-777" for="id_priority">Пріоритет</label>
+<!--    <select name="priority" id="id_priority" class="supernova-input-777">
+<!--        {% for value, label in form.fields.priority.choices %}
+<!--            <option value="{{ value }}" {% if form.priority.value|stringformat:"s" == value|stringformat:"s" %}selected{% endif %}>{{ label }}</option>
+<!--        {% endfor %}
+<!--    </select>
+<!--</div>

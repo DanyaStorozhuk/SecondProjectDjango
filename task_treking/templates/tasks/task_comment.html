@@ -1,0 +1,95 @@
+{% extends 'tasks/base.html' %}
+{% block content %}
+<style>
+.review-wrapper-888 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 140px);
+  padding: 30px;
+}
+
+.review-card-888 {
+  background: #ffffff;
+  padding: 50px;
+  border-radius: 25px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  width: 420px;
+  transition: transform 0.2s ease;
+}
+
+.review-card-888:hover {
+  transform: none;
+}
+
+.review-title-888 {
+  font-size: 32px;
+  font-weight: 900;
+  color: #1e293b;
+}
+
+/* 🔹 Стиль кнопки */
+.review-btn-888 {
+  display: inline-block;
+  padding: 15px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  background: linear-gradient(135deg, #3e3a3a, #7c7f86);
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+.review-btn-888:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #434752, #67696d);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+.review-btn-888:active {
+  transform: scale(0.97);
+  background: linear-gradient(135deg, #434752, #67696d);
+}
+
+/* 🔹 Стиль поля для введення тексту */
+.review-card-888 textarea,
+.review-card-888 input[type="text"] {
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  border: 2px solid #cbd5e1;
+  border-radius: 12px;
+  outline: none;
+  transition: all 0.3s ease;
+  background: #f8fafc;
+  resize: none; /* Забороняє розтягувати */
+}
+
+.review-card-888 textarea:focus,
+.review-card-888 input[type="text"]:focus {
+  border-color: #4c4e53;
+  box-shadow: 0 0 8px rgba(94, 95, 97, 0.4);
+  background: #fff;
+}
+</style>
+
+<div class="review-wrapper-888">
+    <div class="review-card-888">
+        <h2 class="review-title-888">Додай відгук</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="review-btn-888">Додати</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

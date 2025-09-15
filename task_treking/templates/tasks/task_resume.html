@@ -1,0 +1,110 @@
+{% extends 'tasks/base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+
+
+.resume-wrapper-777 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 140px);
+  padding: 30px;
+}
+
+
+.resume-card-777 {
+  width: 500px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+
+.resume-title-777 {
+  font-size: 28px;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 10px;
+  color: #000000;
+}
+
+
+.resume-form-777 {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+
+.resume-form-777 label {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #374151;
+}
+
+
+.resume-input-777, .resume-form-777 input, .resume-form-777 textarea, .resume-form-777 select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #cbd5e1;
+  outline: none;
+  font-size: 16px;
+  transition: border 0.2s, box-shadow 0.2s;
+  resize: none;
+}
+
+.resume-input-777:focus, .resume-form-777 input:focus, .resume-form-777 textarea:focus, .resume-form-777 select:focus {
+  border-color: #000000;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+
+.resume-btn-777 {
+  background: linear-gradient(135deg, #4f5257, #6c727c);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 12px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
+}
+
+.resume-btn-777:hover {
+  transform: scale(1.03);
+  opacity: 0.95;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+  color: #000;
+}
+
+.resume-back-btn-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+</style>
+
+<div class="resume-wrapper-777">
+  <div class="resume-card-777">
+    <div class="resume-title-777">Заповнити резюме</div>
+    <form class="resume-form-777" method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="resume-btn-777">Відправити</button>
+    </form>
+    <div class="resume-back-btn-container">
+      <a href="{% url 'tasks:task-list' %}" class="resume-btn-777">Перейти Назад</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'tasks/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Відхилення резюме</h2>
+    <p>Ви впевнені що хочете відхилити резюме "{{object.title}}" ?</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">Так, видалити</button>
+        <a href="{% url 'tasks:new-resume' %}" class="btn btn-primary">Ні, повернутися до списку резюме</a>
+    </form>
+</div>
+{% endblock %}

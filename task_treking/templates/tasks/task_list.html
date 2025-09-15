@@ -1,0 +1,114 @@
+{% extends 'tasks/base.html' %}
+
+{% block content %}
+<style>
+.galaxy-container-928 {
+    min-height: calc(100vh - 140px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+
+}
+
+.stellar-grid-481 {
+    width: 100%;
+    max-width: 1100px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 28px;
+}
+
+.nebula-card-222 {
+    background: #ffffff;
+    border-radius: 25px; /* більше округлення як у першому */
+    box-shadow: 0 15px 40px rgba(0,0,0,0.25); /* та сама глибока тінь */
+    padding: 32px;
+    text-align: center;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.nebula-card-222:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 50px rgba(0,0,0,0.3); /* ефект як у home-btn */
+}
+
+.cosmos-face-119 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; /* більше повітря між елементами */
+}
+
+.orbit-title-731 {
+    font-size: 24px;
+    font-weight: 900;
+    color: #1e293b; /* як home-title-777 */
+    margin-bottom: 8px;
+}
+
+.meteor-btn-444 {
+    display: inline-block;
+    padding: 15px 24px;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #4f5257, #6c727c); /* як у home-btn-777 */
+    color: #fff !important;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 18px;
+    transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
+    border: none;
+}
+
+.meteor-btn-444:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    background: linear-gradient(135deg, #4f5257, #6c727c);
+    color: #000 !important;
+}
+
+/* Адаптив */
+@media (max-width: 576px) {
+    .orbit-title-731 { font-size: 20px; }
+    .meteor-btn-444 { width: 100%; text-align: center; }
+}
+</style>
+
+<div class="galaxy-container-928">
+    <div class="stellar-grid-481">
+        <div class="nebula-card-222">
+            <div class="cosmos-face-119">
+                <div class="orbit-title-731">Переглянути завдання</div>
+                <a href="{% url 'tasks:task-create' %}" class="meteor-btn-444">Додати завдання</a>
+                <a href="{% url 'tasks:task-task' %}" class="meteor-btn-444">Переглянути список завдань</a>
+            </div>
+        </div>
+
+        <div class="nebula-card-222">
+            <div class="cosmos-face-119">
+                <div class="orbit-title-731">Відгуки</div>
+                <a href="{% url 'tasks:task-comment' %}" class="meteor-btn-444">Додати відгук</a>
+                <a href="{% url 'tasks:task_view_list' %}" class="meteor-btn-444">Переглянути відгуки</a>
+            </div>
+        </div>
+
+        <div class="nebula-card-222">
+            <div class="cosmos-face-119">
+                <div class="orbit-title-731">Майстри</div>
+                <a href="{% url 'tasks:worker-task-detail' %}" class="meteor-btn-444">Переглянути майстрів</a>
+                <a href="{% url 'tasks:task-resume' %}" class="meteor-btn-444">Відправити Резюме</a>
+                <a href="{% url 'tasks:new-resume' %}" class="meteor-btn-444">Переглянути резюме</a>
+            </div>
+        </div>
+
+        <div class="nebula-card-222">
+            <div class="cosmos-face-119">
+                <div class="orbit-title-731">Авто з якими ми працюємо</div>
+                <a href="{% url 'tasks:task-auto' %}" class="meteor-btn-444">Список авто</a>
+                <a href="{% url 'tasks:add-auto' %}" class="meteor-btn-444">Додати авто</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,124 @@
+{% extends 'tasks/base.html' %}
+{% block content %}
+<style>
+.add-auto-wrapper-777 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+}
+
+.add-auto-title-777 {
+  font-size: 28px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.add-auto-box-777 {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(84, 83, 83, 0.1);
+  width: 100%;
+  max-width: 500px;
+}
+
+/* Поля вводу */
+.add-auto-box-777 label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #4a4b4d;
+}
+
+.add-auto-box-777 input,
+.add-auto-box-777 textarea,
+.add-auto-box-777 select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-bottom: 16px;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.add-auto-box-777 input:focus,
+.add-auto-box-777 textarea:focus,
+.add-auto-box-777 select:focus {
+  border-color: #55575a;
+  box-shadow: 0 0 5px rgba(122, 124, 126, 0.3);
+  outline: none;
+}
+
+.meteor-btn-444 {
+  background-color: #6c757d; /* 🔹 Замість темно-синього ставимо сірий */
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.meteor-btn-444:hover {
+  background-color: #6c757d; /* 🔹 Замість темно-синього ставимо сірий */
+  transform: scale(1.05);
+  opacity: 0.9;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.bottom-btn-wrapper-777 {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.bottom-btn-wrapper-777 .btn-home {
+  background-color: #5c6773;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
+}
+
+.bottom-btn-wrapper-777 .btn-home:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+</style>
+
+<div class="add-auto-wrapper-777">
+  <h2 class="add-auto-title-777">Додати авто</h2>
+  <div class="add-auto-box-777">
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% for field in form %}
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field }}
+        {% if field.help_text %}
+          <small style="color:#6c757d;">{{ field.help_text }}</small>
+        {% endif %}
+        {% for error in field.errors %}
+          <p style="color:red;">{{ error }}</p>
+        {% endfor %}
+      {% endfor %}
+      <button type="submit" class="meteor-btn-444">Додати авто</button>
+    </form>
+  </div>
+  
+  <div class="bottom-btn-wrapper-777">
+    <a href="{% url 'tasks:task-list' %}" class="btn-home">Головна сторінка</a>
+  </div>
+</div>
+{% endblock %}

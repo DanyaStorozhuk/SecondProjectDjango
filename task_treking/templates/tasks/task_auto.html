@@ -1,0 +1,154 @@
+{% extends 'tasks/base.html' %}
+
+{% block content %}
+<style>
+
+.cars-wrapper-777 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+}
+
+/* Заголовок  напис */
+.cars-title-777 {
+  font-size: 28px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+
+.cars-grid-777 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+}
+
+
+.car-card-777 {
+  width: 260px;
+  height: 350px;
+  perspective: 1000px;
+}
+
+
+.car-inner-777 {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.car-card-777.flip .car-inner-777 {
+  transform: rotateY(180deg);
+}
+
+
+.car-front-777, .car-back-777 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  background: #938e8e;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+.car-front-777 p {
+  margin: 6px 0;
+  font-size: 16px;
+  color: #1f2937;
+}
+
+
+.car-back-777 {
+  transform: rotateY(180deg);
+  background: #000;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.car-back-777 img {
+  width: 260px;       /* Фіксована ширина */
+  height: 350px;      /* Фіксована висота */
+  object-fit: cover;  /* Обрізає і масштабує картинку, щоб заповнити весь блок */
+  border-radius: 15px;
+  display: block;
+}
+
+
+.bottom-btn-wrapper-777 {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.bottom-btn-wrapper-777 .btn-home {
+  background-color: #55575a;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
+}
+
+.bottom-btn-wrapper-777 .btn-home:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+</style>
+
+<div class="cars-wrapper-777">
+  <h2 class="cars-title-777">Список Авто</h2>
+
+  <div class="cars-grid-777">
+    {% for car in cars %}
+      <div class="car-card-777" onclick="this.classList.toggle('flip')">
+        <div class="car-inner-777">
+          
+
+          <div class="car-front-777">
+            <p><strong>Власник:</strong> {{ car.owner.username }}</p>
+            <p><strong>Марка:</strong> {{ car.brand }}</p>
+            <p><strong>Модель:</strong> {{ car.model }}</p>
+            <p><strong>Рік:</strong> {{ car.year }}</p>
+          </div>
+
+          
+          <div class="car-back-777">
+            {% if car.photo %}
+              <img src="{{ car.photo.url }}" alt="Фото авто">
+            {% else %}
+              <img src="https://via.placeholder.com/260x350?text=No+Image" alt="іфваіфвафіва">
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <p>Немає авто</p>
+    {% endfor %}
+  </div>
+
+  <div class="bottom-btn-wrapper-777">
+    <a href="{% url 'tasks:task-list' %}" class="btn-home">Головна сторінка</a>
+  </div>
+</div>
+{% endblock %}

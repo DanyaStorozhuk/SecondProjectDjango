@@ -1,0 +1,103 @@
+{% extends 'tasks/base.html' %}
+
+{% block content %}
+<style>
+
+.workers-wrapper-777 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+}
+
+
+.workers-title-777 {
+  font-size: 28px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+
+.workers-list-777 {
+  width: 100%;
+  max-width: 700px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 30px 0;
+}
+
+.worker-item-777 {
+  background: #fff;
+  padding: 15px 20px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.worker-item-777:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+.worker-item-777 span {
+  font-size: 14px;
+  color: #374151;
+  background: #e5e7eb;
+  border-radius: 8px;
+  padding: 5px 8px;
+  width: fit-content;
+}
+
+
+.workers-btn-777 {
+  background: linear-gradient(135deg, #7c7d7d, #6c727c);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.workers-btn-777:hover {
+  transform: scale(1.05);
+  opacity: 0.95;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  color: #000;
+}
+</style>
+
+<div class="workers-wrapper-777">
+  <h2 class="workers-title-777">Наші працівники</h2>
+
+  <ul class="workers-list-777">
+    {% for worker in workers %}
+      <li class="worker-item-777">
+        <a href="{% url 'tasks:task-detail-resume' worker.pk %}">Змінити дані</a>   
+        <span><strong>Ім'я:</strong> {{ worker.user.username }}</span>
+        <span><strong>Посада:</strong> {{ worker.title }}</span>
+        <span><strong>Досвід:</strong> {{ worker.experience }}</span>
+        <span><strong>Освіта:</strong> {{ worker.education }}</span>
+        <span><strong>Навички:</strong> {{ worker.skils }}</span>
+        <span><strong>Дата створення:</strong> {{ worker.data_create }}</span>
+      </li>
+    {% empty %}
+      <li class="worker-item-777">
+        Немає працівників
+      </li>
+    {% endfor %}
+  </ul>
+
+  <a href="{% url 'tasks:task-list' %}" class="workers-btn-777">Головна сторінка</a>
+</div>
+{% endblock %}

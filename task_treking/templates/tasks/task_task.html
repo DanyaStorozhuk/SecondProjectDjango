@@ -1,0 +1,171 @@
+{% extends 'tasks/base.html' %}
+{% block content %}
+<style>
+.tasks-wrapper-777 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+}
+
+.tasks-title-777 {
+  font-size: 28px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.filter-form-777 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+
+.filter-form-777 select {
+  width: 250px; /* зробили ширшим */
+  height: auto;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.filter-form-777 button {
+  background-color: #ffc107;
+  color: #000;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 20px;
+  font-weight: 600;
+  font-size: 16px;
+  transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
+}
+
+.filter-form-777 button:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.tasks-list-777 {
+  width: 100%;
+  max-width: 700px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 30px 0;
+}
+
+.task-item-777 {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.task-item-777 a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #007bff;
+  font-size: 18px;
+}
+
+.task-badges-777 {
+  display: flex;
+  gap: 10px;
+}
+
+.task-badge {
+  background-color: #007bff;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.task-actions-777 {
+  margin-top: 10px;
+}
+
+.task-actions-777 button {
+  background-color: #ffc107;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-weight: 600;
+  transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
+}
+
+.task-actions-777 button:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.bottom-btn-wrapper-777 {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.bottom-btn-wrapper-777 .btn-home {
+  background-color: #55575a;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
+}
+
+.bottom-btn-wrapper-777 .btn-home:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+</style>
+
+<div class="tasks-wrapper-777">
+  <h2 class="tasks-title-777">Наші завдання</h2>
+
+  <form method="get" action="{% url 'tasks:task-task' %}" class="filter-form-777">
+    {{ form.status }}
+    <button type="submit">Фільтрувати</button>
+  </form>
+
+  <ul class="tasks-list-777">
+    {% for task in tasks %}
+      <li class="task-item-777">
+        <a href="{% url 'tasks:task-detail' task.pk %}">{{ task.title }}</a>
+        <div class="task-badges-777">
+          <span class="task-badge">{{ task.status }}</span>
+          <span class="task-badge">{{ task.priority }}</span>
+        </div>
+        <div class="task-actions-777">
+          <form action="{% url 'tasks:task-complete' task.pk %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-warning btn-sm">Помітити як виконане</button>
+          </form>
+        </div>
+      </li>
+    {% empty %}
+      <li class="task-item-777">Завдань ще немає.</li>
+    {% endfor %}
+  </ul>
+
+  <div class="bottom-btn-wrapper-777">
+    <a href="{% url 'tasks:task-list'%}" class="btn-home">Головна сторінка</a>
+  </div>
+</div>
+{% endblock %}

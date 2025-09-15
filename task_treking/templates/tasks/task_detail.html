@@ -1,0 +1,101 @@
+{% extends 'tasks/base.html' %}
+
+{% block content %}
+<style>
+.task-detail-wrapper-777 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 140px);
+  padding: 30px;
+  color: #fff;
+}
+
+.task-detail-card-777 {
+  padding: 25px;
+  border-radius: 15px;
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+}
+
+.task-detail-card-777 h2 {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+.task-detail-card-777 p {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #ddd;
+}
+
+.badge {
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.badge-primary {
+  background: #007bff;
+  color: #fff;
+}
+
+.badge-secondary {
+  background: #6c757d;
+  color: #fff;
+}
+
+.task-btns-777 {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.task-btns-777 .btn-custom {
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
+}
+
+.btn-warning {
+  background: #ffc107;
+  color: #000;
+}
+
+.btn-danger {
+  background: #dc3545;
+  color: #fff;
+}
+
+.task-btns-777 .btn-custom:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+</style>
+
+<div class="task-detail-wrapper-777">
+  <div class="task-detail-card-777">
+    <h2>{{ task.title }}</h2>
+    <p>{{ task.description }}</p>
+
+    <p>Статус: <span class="badge badge-primary">{{ task.status }}</span></p>
+    <p>Пріоритет: <span class="badge badge-secondary">{{ task.priority }}</span></p>
+
+    <div class="task-btns-777">
+      <a href="{% url 'tasks:task-update' task.id %}" class="btn-custom btn-warning">Редагувати</a>
+      <a href="{% url 'tasks:task-delete' task.id %}" class="btn-custom btn-danger">Видалити</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
