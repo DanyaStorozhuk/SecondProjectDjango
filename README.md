@@ -31,7 +31,7 @@ Clients can see which cars we work with, add their own task or describe a proble
 
     ```bash
     git clone https://github.com/DanyaStorozhuk/SecondProjectDjango.git
-    cd Django_myProject_logika
+    cd SecondProjectDjango_v2
     ```
 
 2. **Set Up a Virtual Environment**:
