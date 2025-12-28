@@ -136,3 +136,63 @@ Access the application at http://127.0.0.1:8000
 - Allow users to choose the mechanic they liked before
 - Enable rating the worker
 - Create a ranking of cars that visit the station most frequently
+
+## Screenshots
+
+### First Page Login/Sing
+![First Page Login/Sing Screen](screens/First_Page.png)
+
+### Login Page
+![Login Page Screen](screens/Login.png)
+
+### Sing Page
+![Sing Page Screen](screens/Sing.png)
+
+### Homepage
+![Homepage Screen](screens/Homepage.png)
+
+### List/Filter Task Page
+![List/Filter Task Screen](screens/List_Filter_Task.png)
+
+### List Comments Page
+![List Comments Screen](screens/List_Comments.png)
+
+### Create Task Page
+![Create Task Screen](screens/Create_Task.png)
+
+### List Workers Page
+![List Workers Screen](screens/List_Workers.png)
+
+### Update Worker Page
+![Order Table Screen](screens/Update_worker.png)
+
+### Create Resume Page
+![Create Resume Screen](screens/Create_resume.png)
+
+### List Car Page
+![List Car Screen](screens/List_car.png)
+
+### Create Car Page
+![Homepage Screen](screens/Create_Car.png)
+
+### Not Login Page
+![Not Login Screen](screens/Not_login.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## 📌 Author
+Danya Storozhuk
+GitHub: https://github.com/DanyaStorozhuk

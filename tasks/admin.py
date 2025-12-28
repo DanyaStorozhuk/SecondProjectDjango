@@ -3,7 +3,7 @@ from tasks.models import Task, CustomUser, Car, Comment, Resume
 
 # Register your models here.
 
-
+# K9t!zR7qL2m#
 # Реєструємо модель Task у адмінці, щоб можна було керувати нею через веб-інтерфейс
 admin.site.register(Task)
 
